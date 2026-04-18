@@ -56,7 +56,12 @@ h2.stitle em{font-style:normal;color:var(--accent)}
 .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:clamp(30px,5vw,80px);align-items:center;width:100%;min-width:0}
 @media(max-width:900px){.hero-inner{grid-template-columns:1fr;}.hphoto-wrap{display:flex;justify-content:center;order:-1;margin-bottom:10px}}
 
-.hcon{max-width:600px;min-width:0;overflow:hidden}
+/* Replace ONLY .hcon block */
+.hcon{
+  max-width:600px;
+  min-width:0;
+  overflow:visible;   /* was hidden */
+}
 .heyebrow{font-size:clamp(12px,1.3vw,15px);color:var(--accent);letter-spacing:3.5px;text-transform:uppercase;font-weight:500;margin-bottom:18px;opacity:0;animation:fu 0.8s 2.2s forwards;display:flex;align-items:center;gap:10px}
 .heyebrow::before{content:'';display:inline-block;width:26px;height:1px;background:var(--accent)}
 /* Update the main name container */
@@ -74,22 +79,17 @@ h2.stitle em{font-style:normal;color:var(--accent)}
 }
 
 /* Update 'Karande' specifically */
-.hname .l2 {
-  /* This ensures the padding expands the background clip area */
-  display: inline-block; 
-  
-  background: linear-gradient(125deg, var(--accent) 0%, var(--accent2) 45%, var(--accent3) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  
-  /* FIXED: The padding must be large enough to clear the negative letter-spacing */
-  padding-right: 35px; 
-  margin-right: -35px; 
-  
-  /* Additional safety to prevent any layout shifts */
-  vertical-align: bottom;
-  width: auto;
+/* ONLY replace your current .hname .l2 block with this */
+.hname .l2{
+  display:inline-block;
+  background:linear-gradient(125deg,var(--accent) 0%,var(--accent2) 45%,var(--accent3) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+
+  /* FIX for cut 'e' */
+  padding-right:12px;
+  margin-right:0;
 }
 .htag{font-size:clamp(16px,2.2vw,24px);font-weight:300;color:var(--text);margin-bottom:17px;letter-spacing:-0.2px;opacity:0;animation:fu 0.9s 2.6s forwards}
 .hdesc{max-width:550px;color:var(--muted);font-size:clamp(13px,1.4vw,16px);line-height:1.88;margin-bottom:40px;opacity:0;animation:fu 0.9s 2.8s forwards}
