@@ -64,26 +64,32 @@ h2.stitle em{font-style:normal;color:var(--accent)}
   font-family: 'Syne', sans-serif;
   font-size: clamp(48px, 6.8vw, 100px);
   font-weight: 800;
-  letter-spacing: -3px; /* This is the culprit */
+  letter-spacing: -3px; 
   line-height: 1.1;
-  margin-bottom: 24px;
+  margin-bottom: 64px;
   opacity: 0;
   animation: fu 0.9s 2.4s forwards;
-  overflow: visible !important; /* Forces the browser to show what's outside the box */
+  /* CRITICAL: Allow the letters to spill outside the box */
+  overflow: visible !important; 
 }
 
 /* Update 'Karande' specifically */
 .hname .l2 {
-  display: block; /* Forces it to be its own container */
-  width: max-content; /* Tells the browser to take all the space the text needs */
+  /* This ensures the padding expands the background clip area */
+  display: inline-block; 
+  
   background: linear-gradient(125deg, var(--accent) 0%, var(--accent2) 45%, var(--accent3) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   
-  /* The padding-right is the safety buffer */
-  padding-right: 0.5em; 
-  margin-right: -0.5em;
+  /* FIXED: The padding must be large enough to clear the negative letter-spacing */
+  padding-right: 35px; 
+  margin-right: -35px; 
+  
+  /* Additional safety to prevent any layout shifts */
+  vertical-align: bottom;
+  width: auto;
 }
 .htag{font-size:clamp(16px,2.2vw,24px);font-weight:300;color:var(--text);margin-bottom:17px;letter-spacing:-0.2px;opacity:0;animation:fu 0.9s 2.6s forwards}
 .hdesc{max-width:550px;color:var(--muted);font-size:clamp(13px,1.4vw,16px);line-height:1.88;margin-bottom:40px;opacity:0;animation:fu 0.9s 2.8s forwards}
@@ -97,7 +103,7 @@ h2.stitle em{font-style:normal;color:var(--accent)}
 /* ═══ PHOTO WRAP ═══ */
 .hphoto-wrap{
   position:relative;
-  width:clamp(240px,28vw,360px);
+  width:clamp(340px,38vw,460px);
   flex-shrink:0;
   opacity:0;
   animation:fu 1s 2.5s forwards;
@@ -399,7 +405,7 @@ footer{position:relative;z-index:1;background:rgba(14,14,22,0.92);border-top:1px
     <!-- Left: Text content -->
     <div class="hcon">
       <p class="heyebrow">AI Engineer &amp; Data Analyst</p>
-      <h1 class="hname">Sahil<br><span class="l2">Karande</span></h1>
+      <h1 class="hname">Sahil<br><span class="l2">Karande </span></h1>
       <p class="htag">Building the Future, One Model at a Time.</p>
       <p class="hdesc">I am an AI Engineer &amp; Data Analyst specializing in intelligent systems and high-performance web applications. From research papers to production-ready code, I turn complex data into seamless digital experiences.</p>
       <div class="hcta">
