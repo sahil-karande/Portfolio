@@ -1364,6 +1364,28 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+/* ═══ UI SOUND EFFECTS (CLICK ONLY) ═══ */
+// 1. Initialize audio object (Replace with your actual file name!)
+const clickSound = new Audio('click.wav');
+
+// 2. Keep the volume very low so it feels polished
+clickSound.volume = 0.15; // 15% volume
+
+// 3. Play function
+function playClickSound() {
+  clickSound.currentTime = 0; // Rewind to start so it plays immediately on rapid clicks
+  clickSound.play().catch(() => {}); // Catch prevents errors if the browser blocks autoplay
+}
+
+// 4. Attach the sound to interactive elements once the page loads
+window.addEventListener('DOMContentLoaded', () => {
+  // Select all links, buttons, and flippable cards
+  const interactives = document.querySelectorAll('a, button, .fc, .dc, .logo-item, .db-thumb, .tcat');
+  
+  interactives.forEach(el => {
+    el.addEventListener('click', playClickSound);
+  });
+});
 </script>
 <audio id="bg-music" loop>
   <source src="portfoliosong.mp3" type="audio/mpeg"> </audio>
