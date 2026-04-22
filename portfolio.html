@@ -687,15 +687,21 @@ header {
           </div>
           <div class="db-gallery" id="dgallery-0">
             <div class="db-main-img" id="dmain-0">
-              <div class="placeholder-screen">
-                <div class="psi">📊</div>
-                <span>Add your dashboard screenshot here<br><small style="opacity:0.5">Replace placeholder with img tag</small></span>
-              </div>
+              <img src="dashboard1.png" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;" alt="Main Dashboard View">
             </div>
+
             <div class="db-thumbs" id="dthumbs-0">
-              <div class="db-thumb active th0-0" onclick="switchThumb(event,0,0)"><div class="th-placeholder">📊</div></div>
-              <div class="db-thumb th0-1" onclick="switchThumb(event,0,1)"><div class="th-placeholder">📈</div></div>
-              <div class="db-thumb th0-2" onclick="switchThumb(event,0,2)"><div class="th-placeholder">🗺️</div></div>
+              <div class="db-thumb active th0-0" onclick="switchThumb(event,0,0)">
+                <img src="dashboard2.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" alt="Part 1">
+              </div>
+
+              <div class="db-thumb th0-1" onclick="switchThumb(event,0,1)">
+                <img src="dashboard3.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" alt="Part 2">
+              </div>
+
+              <div class="db-thumb th0-2" onclick="switchThumb(event,0,2)">
+                <img src="dash.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" alt="Part 3">
+              </div>
             </div>
           </div>
           <div class="db-footer">
@@ -1261,10 +1267,10 @@ function switchThumb(e, cardIdx, thumbIdx) {
 }
 
 const dashInfo = [
-  {title:'Sales Performance Dashboard', emoji:'📊'},
-  {title:'Health Analytics Dashboard', emoji:'🧬'},
-  {title:'Agri-Data Insights', emoji:'🌾'},
-  {title:'Customer Segmentation', emoji:'🛒'},
+  {title:'Cancer Patient Diagnosis Dataset', img:'healthcare loho.png'},
+  {title:'Health Analytics Dashboard', img:'YOUR_DASHBOARD_2.png'},
+  {title:'Agri-Data Insights', img:'YOUR_DASHBOARD_3.png'},
+  {title:'Customer Segmentation', img:'YOUR_DASHBOARD_4.png'},
 ];
 
 function openModal(e, idx) {
