@@ -402,6 +402,58 @@ header {
   70% { box-shadow: 0 0 0 10px rgba(124, 110, 247, 0); }
   100% { box-shadow: 0 0 0 0 rgba(124, 110, 247, 0); }
 }
+/* --- Gallery Styles --- */
+.project-gallery {
+    margin-bottom: 20px;
+}
+
+.main-image-container {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px; /* Space between main image and thumbnails */
+}
+
+.main-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .main-image-container img {
+    transform: scale(1.05); /* Keeps your existing hover zoom effect */
+}
+
+/* The box containing the 3 thumbnails */
+.thumbnail-container {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+/* Individual thumbnail styles */
+.thumbnail {
+    width: calc(33.33% - 6.66px); /* Perfectly splits them into 3 columns */
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    opacity: 0.5; /* Dimmed by default */
+}
+
+.thumbnail:hover {
+    opacity: 0.8;
+}
+
+/* The currently selected thumbnail */
+.thumbnail.active {
+    border-color: #00ff88; /* Glows with your theme's green color */
+    opacity: 1;
+}
 </style>
 </head>
 <body>
@@ -667,50 +719,51 @@ header {
 
   <div class="dash-grid">
 
-    <!-- Dashboard Card 1 -->
     <div class="dc reveal" id="dcard-0" onclick="flipDash(this,0)">
-      <div class="di">
-        <div class="df">
-          <div class="dfhint">Click to flip</div>
-          <div class="fph c1">
-  <img src="healthcare loho.png" alt="Gyaani Voice Assistant">
-</div>
-          <div class="dfi">
-            <h3>Cancer Patient Diagnosis Dataset</h3>
-            <p>Patient analysis, KPIs &amp; regional analysis</p>
-          </div>
+  <div class="di">
+    <div class="df">
+      <div class="dfhint">Click to flip</div>
+      <div class="fph c1">
+        <img src="healthcare loho.png" alt="Healthcare Logo">
+      </div>
+      <div class="dfi">
+        <h3>Cancer Patient Diagnosis Dataset</h3>
+        <p>Patient analysis, KPIs &amp; regional analysis</p>
+      </div>
+    </div>
+    
+    <div class="db">
+      <div class="db-header">
+        <h3>Sales Performance</h3>
+        <p>Excel . Adv Excel ·  Healthcare Data Analytics</p>
+      </div>
+      <div class="db-gallery" id="dgallery-0">
+        
+        <div class="db-main-img" id="dmain-0">
+          <img src="dashboard1.png" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;" alt="Main Dashboard View">
         </div>
-        <div class="db">
-          <div class="db-header">
-            <h3>Sales Performance</h3>
-            <p>Excel . Adv Excel ·  Healthcare Data Analytics</p>
+
+        <div class="db-thumbs" id="dthumbs-0">
+          <div class="db-thumb active th0-0" onclick="switchThumb(event,0,0)">
+            <img src="dashboard1.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" alt="Part 1">
           </div>
-          <div class="db-gallery" id="dgallery-0">
-            <div class="db-main-img" id="dmain-0">
-              <img src="dashboard1.png" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;" alt="Main Dashboard View">
-            </div>
 
-            <div class="db-thumbs" id="dthumbs-0">
-              <div class="db-thumb active th0-0" onclick="switchThumb(event,0,0)">
-                <img src="dashboard2.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" alt="Part 1">
-              </div>
-
-              <div class="db-thumb th0-1" onclick="switchThumb(event,0,1)">
-                <img src="dashboard3.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" alt="Part 2">
-              </div>
-
-              <div class="db-thumb th0-2" onclick="switchThumb(event,0,2)">
-                <img src="dash.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" alt="Part 3">
-              </div>
-            </div>
+          <div class="db-thumb th0-1" onclick="switchThumb(event,0,1)">
+            <img src="dashboard2.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" alt="Part 2">
           </div>
-          <div class="db-footer">
-            <div class="dtechs"><span class="dtp">Power BI</span><span class="dtp">DAX</span><span class="dtp">SQL</span></div>
-            <button class="vd" onclick="openModal(event,0)">View Dashboard →</button>
+
+          <div class="db-thumb th0-2" onclick="switchThumb(event,0,2)">
+            <img src="dashboard3.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;" alt="Part 3">
           </div>
         </div>
       </div>
+      <div class="db-footer">
+        <div class="dtechs"><span class="dtp">Excel</span><span class="dtp">Adv. Excel</span><span class="dtp">Pivot Table</span></div>
+        <button class="vd" onclick="openModal(event,0)">View Dashboard →</button>
+      </div>
     </div>
+  </div>
+</div>
 
     <!-- Dashboard Card 2 -->
     <div class="dc reveal" id="dcard-1" onclick="flipDash(this,1)">
@@ -1259,48 +1312,91 @@ function flipDash(card, idx) {
 }
 
 function switchThumb(e, cardIdx, thumbIdx) {
-  e.stopPropagation();
-  /* Update thumb active state */
+  e.stopPropagation(); // Stop the card from flipping back over
+  
+  // 1. Update thumb active state
   const thumbs = document.querySelectorAll(`#dthumbs-${cardIdx} .db-thumb`);
   thumbs.forEach((t, i) => t.classList.toggle('active', i === thumbIdx));
-  /* In real usage: swap main image src */
+  
+  // 2. Get the clicked thumbnail's image source
+  const clickedThumbImg = e.currentTarget.querySelector('img');
+  if (!clickedThumbImg) return; 
+  const newSrc = clickedThumbImg.src;
+
+  // 3. Swap the main image source
+  const mainImgContainer = document.getElementById(`dmain-${cardIdx}`);
+  const mainImg = mainImgContainer.querySelector('img');
+  if (mainImg) {
+      mainImg.src = newSrc;
+  }
 }
 
+// Store the data for the modal (Add actual image URLs for the others later)
 const dashInfo = [
-  {title:'Cancer Patient Diagnosis Dataset', img:'healthcare loho.png'},
-  {title:'Health Analytics Dashboard', img:'YOUR_DASHBOARD_2.png'},
-  {title:'Agri-Data Insights', img:'YOUR_DASHBOARD_3.png'},
-  {title:'Customer Segmentation', img:'YOUR_DASHBOARD_4.png'},
+  {title:'Cancer Patient Diagnosis Dataset', emoji: '📊'},
+  {title:'Health Analytics Dashboard', emoji: '🧬'},
+  {title:'Agri-Data Insights', emoji: '🌾'},
+  {title:'Customer Segmentation', emoji: '🛒'},
 ];
 
 function openModal(e, idx) {
-  e.stopPropagation();
+  e.stopPropagation(); // Stop the card from flipping
+  
   const modal = document.getElementById('dashModal');
   document.getElementById('modal-title').textContent = dashInfo[idx].title;
 
-  /* Main area */
-  const main = document.getElementById('modal-main');
-  main.innerHTML = `<span style="font-size:64px;opacity:0.35">${dashInfo[idx].emoji}</span>
-    <p style="color:var(--muted);font-size:13px;margin-top:12px;text-align:center;padding:0 20px">
-      Replace the placeholder in the code with<br>
-      <code style="color:var(--accent3);font-size:12px">&lt;img src="dashboard-${idx+1}-preview.png"&gt;</code><br>
-      to show your actual dashboard screenshot.
-    </p>`;
+  // Grab the CURRENT main image source from the card that was clicked
+  const mainImgOnCard = document.getElementById(`dmain-${idx}`).querySelector('img');
+  const mainImgSrc = mainImgOnCard ? mainImgOnCard.src : null;
 
-  /* Thumbnails */
+  const main = document.getElementById('modal-main');
+  
+  // If there is an image, show it. Otherwise, show the placeholder emoji.
+  if (mainImgSrc) {
+      main.innerHTML = `<img src="${mainImgSrc}" alt="${dashInfo[idx].title} Full View" style="width:100%;height:100%;object-fit:contain;">`;
+  } else {
+      main.innerHTML = `<span style="font-size:64px;opacity:0.35">${dashInfo[idx].emoji}</span>
+        <p style="color:var(--muted);font-size:13px;margin-top:12px;text-align:center;padding:0 20px">
+          Replace the placeholder in the code with<br>
+          <code style="color:var(--accent3);font-size:12px">&lt;img src="dashboard-${idx+1}-preview.png"&gt;</code><br>
+          to show your actual dashboard screenshot.
+        </p>`;
+  }
+
+  // Generate thumbnails for the modal based on what's in the card
+  const cardThumbs = document.querySelectorAll(`#dthumbs-${idx} .db-thumb img`);
   const tRow = document.getElementById('modal-thumbs');
   tRow.innerHTML = '';
-  const emojis = ['🖼️','📈','📉'];
-  emojis.forEach((em, i) => {
-    const t = document.createElement('div');
-    t.className = 'modal-thumb' + (i===0?' active':'');
-    t.innerHTML = em;
-    t.onclick = () => {
-      document.querySelectorAll('.modal-thumb').forEach(x=>x.classList.remove('active'));
-      t.classList.add('active');
-    };
-    tRow.appendChild(t);
-  });
+  
+  if(cardThumbs.length > 0) {
+      cardThumbs.forEach((img, i) => {
+        const t = document.createElement('div');
+        t.className = 'modal-thumb' + (i === 0 ? ' active' : '');
+        // Just put the image directly in the thumb
+        t.innerHTML = `<img src="${img.src}" style="width:100%;height:100%;object-fit:cover;">`;
+        t.onclick = () => {
+          // Change active state
+          document.querySelectorAll('.modal-thumb').forEach(x=>x.classList.remove('active'));
+          t.classList.add('active');
+          // Change main modal image
+          main.querySelector('img').src = img.src;
+        };
+        tRow.appendChild(t);
+      });
+  } else {
+       // Fallback emojis if no images exist yet
+      const emojis = ['🖼️','📈','📉'];
+      emojis.forEach((em, i) => {
+        const t = document.createElement('div');
+        t.className = 'modal-thumb' + (i===0?' active':'');
+        t.innerHTML = em;
+        t.onclick = () => {
+          document.querySelectorAll('.modal-thumb').forEach(x=>x.classList.remove('active'));
+          t.classList.add('active');
+        };
+        tRow.appendChild(t);
+      });
+  }
 
   modal.classList.add('open');
 }
@@ -1394,6 +1490,36 @@ window.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('click', playClickSound);
   });
 });
+// Function to swap the main image when a thumbnail is clicked
+function changeImage(thumbnailElement) {
+    // Find the gallery that contains this specific thumbnail
+    const gallery = thumbnailElement.closest('.project-gallery');
+    
+    // Find the main image inside this specific gallery
+    const mainImage = gallery.querySelector('.main-image');
+    
+    // Swap the main image's source to match the clicked thumbnail
+    mainImage.src = thumbnailElement.src;
+    
+    // Remove the 'active' green border from all thumbnails in this gallery
+    const thumbnails = gallery.querySelectorAll('.thumbnail');
+    thumbnails.forEach(thumb => thumb.classList.remove('active'));
+    
+    // Add the 'active' green border to the one you just clicked
+    thumbnailElement.classList.add('active');
+}
+
+// Function to handle the "View Dashboard" click
+function viewDashboard(linkElement) {
+    // Find the project card you are interacting with
+    const projectCard = linkElement.closest('.project-card');
+    
+    // Grab the source URL of whatever image is currently in the main box
+    const currentMainImage = projectCard.querySelector('.main-image').src;
+    
+    // Open that image in a new tab
+    window.open(currentMainImage, '_blank');
+}
 </script>
 <audio id="bg-music" loop>
   <source src="portfoliosong.mp3" type="audio/mpeg"> </audio>
