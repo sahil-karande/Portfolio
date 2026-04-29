@@ -223,27 +223,117 @@ h2.stitle em{font-style:normal;color:var(--accent)}
 #toolkit{background:transparent}
 #toolkit::before{content:'';position:absolute;inset:0;background:rgba(20,20,32,0.66);z-index:-1}
 .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:17px;margin-top:40px}
-.tcat{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:15px;padding:26px;transition:border-color 0.3s,transform 0.3s;overflow:hidden;position:relative}
+.tcat{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:15px;padding:26px;transition:border-color 0.3s,transform 0.3s;position:relative}
 .tcat:hover{border-color:rgba(124,110,247,0.36);transform:translateY(-3px)}
-.tcat-icon{font-size:26px;margin-bottom:13px}
+
+/* Category icon box */
+.tcat-icon{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;
+  position:relative;
+}
+.tcat-icon svg{width:26px;height:26px;flex-shrink:0}
+.tcat-icon-ai{background:linear-gradient(135deg,rgba(124,110,247,0.25),rgba(192,132,252,0.15));border:1px solid rgba(124,110,247,0.3);box-shadow:0 0 18px rgba(124,110,247,0.18)}
+.tcat-icon-web{background:linear-gradient(135deg,rgba(56,189,248,0.22),rgba(16,185,129,0.12));border:1px solid rgba(56,189,248,0.3);box-shadow:0 0 18px rgba(56,189,248,0.15)}
+.tcat-icon-data{background:linear-gradient(135deg,rgba(251,146,60,0.22),rgba(244,114,182,0.12));border:1px solid rgba(251,146,60,0.3);box-shadow:0 0 18px rgba(251,146,60,0.15)}
+.tcat-icon-devops{background:linear-gradient(135deg,rgba(16,185,129,0.22),rgba(56,189,248,0.12));border:1px solid rgba(16,185,129,0.3);box-shadow:0 0 18px rgba(16,185,129,0.15)}
 .tcat h4{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:18px}
 
-/* Logo carousel */
-.logo-carousel{position:relative;height:72px;overflow:hidden;display:flex;align-items:center}
-.logo-track{display:flex;align-items:center;gap:18px;transition:transform 0.55s cubic-bezier(0.4,0,0.2,1)}
-.logo-item{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;min-width:64px;transition:opacity 0.55s ease,transform 0.55s ease}
-.logo-item.active{opacity:1;transform:scale(1)}
-.logo-item.adjacent{opacity:0.35;transform:scale(0.85)}
-.logo-item.far{opacity:0.1;transform:scale(0.75)}
-.logo-svg{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:7px}
-.logo-svg svg{width:100%;height:100%}
-.logo-item span{font-size:10px;color:var(--muted);white-space:nowrap;letter-spacing:0.3px}
-.logo-item.active span{color:var(--text)}
+/* Logo carousel – infinite marquee */
+.logo-carousel{
+  position:relative;
+  overflow:hidden;
+  display:flex;align-items:flex-end;
+  padding-top:18px;
+  height:108px;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,black 16%,black 84%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0%,black 16%,black 84%,transparent 100%);
+}
+.logo-track{
+  display:flex;align-items:center;gap:26px;
+  width:max-content;
+  animation:marqueeScroll var(--dur,18s) linear infinite;
+}
+.logo-carousel:hover .logo-track{animation-play-state:paused}
+@keyframes marqueeScroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
 
-/* Dots indicator */
-.logo-dots{display:flex;gap:5px;margin-top:10px;justify-content:center}
-.logo-dot{width:4px;height:4px;border-radius:50%;background:rgba(124,110,247,0.3);transition:all 0.3s;cursor:pointer}
-.logo-dot.active{width:14px;border-radius:3px;background:var(--accent)}
+/* Individual logo items — staggered float */
+.logo-item{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  flex-shrink:0;min-width:66px;
+  opacity:0.65;
+  transition:opacity 0.4s ease, transform 0.45s cubic-bezier(0.34,1.56,0.64,1);
+  animation:logoFloat 3.2s ease-in-out infinite;
+  cursor:pointer;
+}
+.logo-item:nth-child(odd) {animation-delay:-1.6s}
+.logo-item:nth-child(3n)  {animation-delay:-0.8s}
+.logo-item:nth-child(4n)  {animation-delay:-2.4s}
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0px)}
+  50%{transform:translateY(-5px)}
+}
+.logo-item:hover{
+  opacity:1;
+  transform:translateY(-7px) scale(1.08);
+  animation-play-state:paused;
+}
+
+/* Logo box — glassmorphism + shimmer */
+.logo-svg{
+  width:46px;height:46px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:12px;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:9px;
+  position:relative;overflow:hidden;
+  transition:box-shadow 0.4s ease, border-color 0.4s ease,
+             transform 0.45s cubic-bezier(0.34,1.56,0.64,1),
+             background 0.4s ease;
+}
+/* Shimmer highlight overlay */
+.logo-svg::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.18) 0%,transparent 55%,rgba(255,255,255,0.06) 100%);
+  opacity:0;border-radius:inherit;
+  transition:opacity 0.35s ease;
+}
+.logo-item:hover .logo-svg::before{opacity:1}
+/* Pulsing glow ring */
+.logo-svg::after{
+  content:'';position:absolute;inset:-3px;border-radius:15px;
+  background:transparent;
+  border:1.5px solid rgba(124,110,247,0);
+  transition:border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.logo-item:hover .logo-svg::after{
+  border-color:rgba(124,110,247,0.45);
+  box-shadow:0 0 14px rgba(124,110,247,0.3), inset 0 0 8px rgba(124,110,247,0.08);
+}
+.logo-svg svg{width:100%;height:100%;position:relative;z-index:1}
+.logo-item:hover .logo-svg{
+  transform:scale(1.18) rotate(4deg);
+  box-shadow:0 14px 32px rgba(124,110,247,0.42), 0 4px 12px rgba(192,132,252,0.2);
+  border-color:rgba(124,110,247,0.55);
+  background:rgba(124,110,247,0.08);
+}
+
+.logo-item span{
+  font-size:10px;color:var(--muted);white-space:nowrap;
+  letter-spacing:0.4px;
+  transition:color 0.3s ease, letter-spacing 0.3s ease;
+}
+.logo-item:hover span{color:var(--text);font-weight:500;letter-spacing:0.6px}
+
+/* Dots hidden – not needed for marquee */
+.logo-dots{display:none}
 
 /* ═══ CERTIFICATIONS ═══ */
 #certifications{background:transparent}
@@ -887,7 +977,16 @@ header {
   <div class="tgrid">
 
     <div class="tcat reveal" data-cat="0">
-      <div class="tcat-icon">🤖</div>
+      <div class="tcat-icon tcat-icon-ai">
+        <!-- Neural network / AI icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="url(#g-ai)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <defs><linearGradient id="g-ai" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7c6ef7"/><stop offset="100%" stop-color="#c084fc"/></linearGradient></defs>
+          <circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>
+          <line x1="12" y1="7" x2="5" y2="17"/><line x1="12" y1="7" x2="19" y2="17"/><line x1="5" y1="17" x2="19" y2="17"/>
+          <circle cx="8.5" cy="12" r="1.2" fill="url(#g-ai)" stroke="none"/>
+          <circle cx="15.5" cy="12" r="1.2" fill="url(#g-ai)" stroke="none"/>
+        </svg>
+      </div>
       <h4>AI &amp; Machine Learning</h4>
       <div class="logo-carousel">
         <div class="logo-track" id="track-0"></div>
@@ -896,7 +995,15 @@ header {
     </div>
 
     <div class="tcat reveal" data-cat="1">
-      <div class="tcat-icon">🌐</div>
+      <div class="tcat-icon tcat-icon-web">
+        <!-- Code brackets icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="url(#g-web)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <defs><linearGradient id="g-web" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#10b981"/></linearGradient></defs>
+          <polyline points="16 18 22 12 16 6"/>
+          <polyline points="8 6 2 12 8 18"/>
+          <line x1="14" y1="4" x2="10" y2="20"/>
+        </svg>
+      </div>
       <h4>Web Development</h4>
       <div class="logo-carousel">
         <div class="logo-track" id="track-1"></div>
@@ -905,7 +1012,16 @@ header {
     </div>
 
     <div class="tcat reveal" data-cat="2">
-      <div class="tcat-icon">📊</div>
+      <div class="tcat-icon tcat-icon-data">
+        <!-- Bar chart / data icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <defs><linearGradient id="g-data" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#fb923c"/><stop offset="100%" stop-color="#f472b6"/></linearGradient></defs>
+          <rect x="3" y="12" width="4" height="9" rx="1" fill="url(#g-data)" opacity="0.9"/>
+          <rect x="10" y="6" width="4" height="15" rx="1" fill="url(#g-data)"/>
+          <rect x="17" y="9" width="4" height="12" rx="1" fill="url(#g-data)" opacity="0.75"/>
+          <polyline points="3 8 10 4 17 6" stroke="url(#g-data)" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
       <h4>Data Analysis</h4>
       <div class="logo-carousel">
         <div class="logo-track" id="track-2"></div>
@@ -914,7 +1030,14 @@ header {
     </div>
 
     <div class="tcat reveal" data-cat="3">
-      <div class="tcat-icon">🔧</div>
+      <div class="tcat-icon tcat-icon-devops">
+        <!-- Gear / DevOps icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="url(#g-devops)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <defs><linearGradient id="g-devops" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient></defs>
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+        </svg>
+      </div>
       <h4>DevOps &amp; Tools</h4>
       <div class="logo-carousel">
         <div class="logo-track" id="track-3"></div>
@@ -1201,67 +1324,37 @@ const toolkitData = [
   }
 ];
 
-/* Build and animate carousels */
+/* Build continuous marquee carousels */
 const carouselStates = [];
 
 function buildCarousels() {
   toolkitData.forEach((cat, ci) => {
     const track = document.getElementById(`track-${ci}`);
     const dotsEl = document.getElementById(`dots-${ci}`);
-    if (!track || !dotsEl) return;
+    if (!track) return;
 
     const tools = cat.tools;
-    carouselStates[ci] = { cur: 0, total: tools.length, timer: null };
+    // Speed: ~2.2s per logo, minimum 14s
+    const dur = Math.max(14, tools.length * 2.2);
+    track.parentElement.style.setProperty('--dur', dur + 's');
 
-    tools.forEach((tool, ti) => {
+    // Build original set
+    function makeItem(tool) {
       const item = document.createElement('div');
-      item.className = 'logo-item' + (ti === 0 ? ' active' : ti === 1 ? ' adjacent' : ' far');
-      item.dataset.idx = ti;
+      item.className = 'logo-item';
       item.innerHTML = `<div class="logo-svg">${tool.svg}</div><span>${tool.name}</span>`;
-      item.addEventListener('click', () => goToLogo(ci, ti));
-      track.appendChild(item);
-    });
+      return item;
+    }
 
-    tools.forEach((_, ti) => {
-      const dot = document.createElement('div');
-      dot.className = 'logo-dot' + (ti === 0 ? ' active' : '');
-      dot.addEventListener('click', () => goToLogo(ci, ti));
-      dotsEl.appendChild(dot);
-    });
+    // Append items twice for seamless loop
+    tools.forEach(t => track.appendChild(makeItem(t)));
+    tools.forEach(t => track.appendChild(makeItem(t)));
 
-    carouselStates[ci].timer = setInterval(() => {
-      const s = carouselStates[ci];
-      goToLogo(ci, (s.cur + 1) % s.total);
-    }, 1800 + ci * 300);
+    carouselStates[ci] = { cur: 0, total: tools.length };
   });
 }
 
-function goToLogo(ci, idx) {
-  const state = carouselStates[ci];
-  state.cur = idx;
-  const total = state.total;
-  const track = document.getElementById(`track-${ci}`);
-  const items = track.querySelectorAll('.logo-item');
-  const dots = document.getElementById(`dots-${ci}`).querySelectorAll('.logo-dot');
-
-  /* shift track so active is centered */
-  const ITEM_W = 82; /* width + gap */
-  const VISIBLE = 3;
-  const offset = -(idx * ITEM_W) + (VISIBLE - 1) * ITEM_W / 2;
-  track.style.transform = `translateX(${offset}px)`;
-
-  items.forEach((item, ti) => {
-    const dist = Math.abs(ti - idx);
-    item.classList.remove('active','adjacent','far');
-    if (dist === 0) item.classList.add('active');
-    else if (dist === 1) item.classList.add('adjacent');
-    else item.classList.add('far');
-  });
-
-  dots.forEach((dot, di) => {
-    dot.classList.toggle('active', di === idx);
-  });
-}
+function goToLogo() {} // kept to avoid reference errors
 
 /* ═══ DASHBOARD FLIP + MODAL ═══ */
 function flipDash(card, idx) {
