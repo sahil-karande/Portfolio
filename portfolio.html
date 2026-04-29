@@ -52,7 +52,15 @@ h2.stitle em{font-style:normal;color:var(--accent)}
 .hscan::after{content:'';position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(124,110,247,0.5),rgba(56,189,248,0.28),transparent);top:-2px;animation:scan 7s linear infinite}
 @keyframes scan{0%{top:-2px;opacity:0}8%{opacity:1}88%{opacity:0.3}100%{top:100%;opacity:0}}
 .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:clamp(30px,5vw,80px);align-items:center;width:100%;min-width:0}
-@media(max-width:900px){.hero-inner{grid-template-columns:1fr;}.hphoto-wrap{display:flex;justify-content:center;order:-1;margin-bottom:10px}}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;}
+  .hphoto-wrap{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;order:-1;margin-bottom:28px;width:100%;max-width:300px;margin-left:auto;margin-right:auto;}
+  .hcon{display:flex;flex-direction:column;align-items:flex-start;text-align:left;}
+  .heyebrow{justify-content:flex-start;}
+  .hdesc{text-align:left;}
+  .hcta{justify-content:flex-start;}
+  .hphoto-wrap::before{display:none;}
+}
 .hcon{max-width:600px;min-width:0;overflow:visible}
 .heyebrow{font-size:clamp(13px,1.3vw,16px);color:var(--accent);letter-spacing:3.5px;text-transform:uppercase;font-weight:500;margin-bottom:18px;opacity:0;animation:fu 0.8s 2.2s forwards;display:flex;align-items:center;gap:10px}
 .heyebrow::before{content:'';display:inline-block;width:26px;height:1px;background:var(--accent)}
@@ -194,7 +202,12 @@ h2.stitle em{font-style:normal;color:var(--accent)}
 #featured::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(20,20,32,0.82) 10%,rgba(20,20,32,0.82) 90%,transparent);z-index:-1}
 .fcard{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:22px;padding:clamp(24px,4vw,48px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,52px);align-items:center;transition:border-color 0.3s,transform 0.3s;margin-bottom:22px}
 .fcard:hover{border-color:rgba(124,110,247,0.3);transform:translateY(-4px)}
-@media(max-width:700px){.fcard{grid-template-columns:1fr}}
+@media(max-width:700px){
+  .fcard{grid-template-columns:1fr;}
+  .fcard>div:first-child{order:2;}
+  .fcard .fimg{order:1;}
+  .fcard.rev{direction:ltr;}
+}
 .fcard.rev{direction:rtl}
 .fcard.rev>*{direction:ltr}
 .flbl{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:9px}
@@ -1073,9 +1086,9 @@ function sendMsg(){
     const cs=['124,110,247','56,189,248','192,132,252'];
     return{x:Math.random()*W,y:Math.random()*H,r:0,maxR:200+Math.random()*300,sp:1.0+Math.random()*0.8,a:0.3,col:cs[Math.floor(Math.random()*cs.length)]}
   }
-  function init(){resize();pts=Array.from({length:220},mkPt);shots=[];pulses=[]}
+  function init(){resize();pts=Array.from({length:120},mkPt);shots=[];pulses=[]}
   function drawLines(){
-    const md=160;
+    const md=130;
     for(let i=0;i<pts.length;i++){
       for(let j=i+1;j<pts.length;j++){
         const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
