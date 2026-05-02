@@ -2888,6 +2888,14 @@
     </div>
   </section>
 
+  <!-- Modal for Certificate Full View -->
+  <div class="modal-overlay" id="certModal" onclick="closeCertModal(event)" style="z-index:2000;">
+    <div class="modal-box" style="background:transparent; border:none; box-shadow:none; align-items:center; justify-content:center; display:flex; max-width:none; width:auto; overflow:visible;">
+      <button class="modal-close" style="position:fixed; top:20px; right:20px; background:rgba(0,0,0,0.5); border-radius:50%; width:40px; height:40px; z-index:2001;" onclick="document.getElementById('certModal').classList.remove('open')">✕</button>
+      <img id="cert-modal-img" src="" style="object-fit: contain; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    </div>
+  </div>
+
   <!-- Modal for full dashboard view -->
   <div class="modal-overlay" id="dashModal" onclick="closeModal(event)">
     <div class="modal-box">
@@ -3100,28 +3108,47 @@
     <h2 class="stitle reveal">Certifications <em>&amp;</em> Awards</h2>
     <div class="cgrid">
       <div class="cc reveal">
-        <div class="cc-icon">🎓</div>
-        <h4>Machine Learning Specialization</h4>
-        <p>Deep dive into supervised, unsupervised, and reinforcement learning methods.</p>
-        <div class="ciss">Coursera / Andrew Ng</div>
+        <!-- Replace src with your actual certificate image -->
+        <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+          <img src="gondi-certi.jpeg" style="width: 160px; min-height: 500px; object-fit: contain; cursor: pointer; transform: rotate(-90deg);" onclick="openCert(this)" alt="Certificate Placeholder">
+        </div>
+        <h4>Coursera / Andrew Ng</h4>
+        <p>Machine Learning Specialization — Deep dive into supervised, unsupervised, and reinforcement learning methods.</p>
       </div>
       <div class="cc reveal">
-        <div class="cc-icon">☁️</div>
-        <h4>AWS Cloud Practitioner</h4>
-        <p>Foundational knowledge of AWS cloud services, architecture, and deployment.</p>
-        <div class="ciss">Amazon Web Services</div>
+        <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+          <img src="iais2024.jpeg" style="width: 160px; min-height: 500px; object-fit: contain; cursor: pointer; transform: rotate(-90deg);" onclick="openCert(this)" alt="Certificate Placeholder">
+        </div>
+        <h4>Amazon Web Services</h4>
+        <p>AWS Cloud Practitioner — Foundational knowledge of AWS cloud services, architecture, and deployment.</p>
       </div>
       <div class="cc reveal">
-        <div class="cc-icon">📡</div>
-        <h4>IEEE Communication Society</h4>
-        <p>Active member and Vice Chair driving technical initiatives and student chapters.</p>
-        <div class="ciss">IEEE ComSoc</div>
+        <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+          <img src="hachathon.jpeg" style="width: 100%; height: 100%; object-fit: contain; cursor: pointer;" onclick="openCert(this)" alt="Certificate Placeholder">
+        </div>
+        <h4>IEEE ComSoc</h4>
+        <p>IEEE Communication Society — Active member and Vice Chair driving technical initiatives and student chapters.</p>
       </div>
       <div class="cc reveal">
-        <div class="cc-icon">🐍</div>
-        <h4>Python for Data Science</h4>
-        <p>Comprehensive certification covering data manipulation, visualization, and analysis.</p>
-        <div class="ciss">IBM / Coursera</div>
+        <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+          <img src="model-making.jpeg" style="width: 160px; min-height: 500px; object-fit: contain; cursor: pointer; transform: rotate(-90deg);" onclick="openCert(this)" alt="Certificate Placeholder">
+        </div>
+        <h4>IBM / Coursera</h4>
+        <p>Python for Data Science — Comprehensive certification covering data manipulation, visualization, and analysis.</p>
+      </div>
+      <div class="cc reveal">
+        <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+          <img src="upay.jpeg" style="width: 100%; height: 100%; object-fit: contain; cursor: pointer;" onclick="openCert(this)" alt="Certificate Placeholder">
+        </div>
+        <h4>Organization 5</h4>
+        <p>Certificate Title 5 — Replace this description with your fifth certificate details.</p>
+      </div>
+      <div class="cc reveal">
+        <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+          <img src="prodigy.jpeg" style="width: 100%; height: 100%; object-fit: contain; cursor: pointer;" onclick="openCert(this)" alt="Certificate Placeholder">
+        </div>
+        <h4>Organization 6</h4>
+        <p>Certificate Title 6 — Replace this description with your sixth certificate details.</p>
       </div>
     </div>
     <div class="aws">
@@ -3582,8 +3609,41 @@
     }
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') document.getElementById('dashModal').classList.remove('open');
+      if (e.key === 'Escape') {
+        document.getElementById('dashModal').classList.remove('open');
+        const certModal = document.getElementById('certModal');
+        if (certModal) certModal.classList.remove('open');
+      }
     });
+
+    function openCert(imgElement) {
+      const modal = document.getElementById('certModal');
+      const modalImg = document.getElementById('cert-modal-img');
+      modalImg.src = imgElement.src;
+      
+      const isRotated = imgElement.style.transform.includes('rotate');
+      if (isRotated) {
+        modalImg.style.maxWidth = '90vh';
+        modalImg.style.maxHeight = '90vw';
+        modalImg.style.width = 'auto';
+        modalImg.style.height = 'auto';
+        modalImg.style.transform = imgElement.style.transform;
+      } else {
+        modalImg.style.maxWidth = '90vw';
+        modalImg.style.maxHeight = '90vh';
+        modalImg.style.width = 'auto';
+        modalImg.style.height = 'auto';
+        modalImg.style.transform = 'none';
+      }
+      
+      modal.classList.add('open');
+    }
+
+    function closeCertModal(e) {
+      if (e.target === document.getElementById('certModal')) {
+        document.getElementById('certModal').classList.remove('open');
+      }
+    }
 
     /* Init carousels after DOM ready */
     buildCarousels();
