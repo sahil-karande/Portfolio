@@ -3455,6 +3455,11 @@
       card.classList.toggle('flipped');
     }
 
+    const thumbTitles = [
+      ['Overview', 'Emirates', 'Cancer Type'],
+      ['Overview', 'Properties', 'Location', 'Finance', 'Q&A']
+    ];
+
     function switchThumb(e, cardIdx, thumbIdx) {
       e.stopPropagation(); // Stop the card from flipping back over
 
@@ -3473,19 +3478,39 @@
       if (mainImg) {
         mainImg.src = newSrc;
       }
+
+      // 4. Update the card header text
+      const dbHeader = document.querySelector(`#dcard-${cardIdx} .db-header h3`);
+      if (dbHeader && thumbTitles[cardIdx] && thumbTitles[cardIdx][thumbIdx]) {
+        dbHeader.textContent = dashInfo[cardIdx].title.replace(' (Power BI)', '') + ' - ' + thumbTitles[cardIdx][thumbIdx];
+      }
     }
 
     // Store the data for the modal (Add actual image URLs for the others later)
     const dashInfo = [
       { title: 'Cancer Patient Diagnosis Dataset', emoji: '📈' },
-      { title: 'Cancer Patient Data (Power BI)', emoji: '📊' }
+      { title: 'Chennai Homes - Real Estate Analysis (Power BI)', emoji: '📊' }
     ];
 
     function openModal(e, idx) {
       e.stopPropagation(); // Stop the card from flipping
 
       const modal = document.getElementById('dashModal');
-      document.getElementById('modal-title').textContent = dashInfo[idx].title;
+      
+      // Determine the currently active thumbnail index to set the initial modal title correctly
+      const activeThumb = document.querySelector(`#dthumbs-${idx} .db-thumb.active`);
+      let activeThumbIdx = 0;
+      if (activeThumb) {
+        const thumbClass = Array.from(activeThumb.classList).find(c => c.startsWith('th' + idx + '-'));
+        if (thumbClass) {
+          activeThumbIdx = parseInt(thumbClass.split('-')[1]);
+        }
+      }
+
+      const initialTitle = (thumbTitles[idx] && thumbTitles[idx][activeThumbIdx]) 
+        ? dashInfo[idx].title.replace(' (Power BI)', '') + ' - ' + thumbTitles[idx][activeThumbIdx] 
+        : dashInfo[idx].title;
+      document.getElementById('modal-title').textContent = initialTitle;
 
       // Grab the CURRENT main image source from the card that was clicked
       const mainImgOnCard = document.getElementById(`dmain-${idx}`).querySelector('img');
@@ -3513,7 +3538,7 @@
       if (cardThumbs.length > 0) {
         cardThumbs.forEach((img, i) => {
           const t = document.createElement('div');
-          t.className = 'modal-thumb' + (i === 0 ? ' active' : '');
+          t.className = 'modal-thumb' + (i === activeThumbIdx ? ' active' : '');
           // Just put the image directly in the thumb
           t.innerHTML = `<img src="${img.src}" style="width:100%;height:100%;object-fit:cover;">`;
           t.onclick = () => {
@@ -3522,6 +3547,10 @@
             t.classList.add('active');
             // Change main modal image
             main.querySelector('img').src = img.src;
+            // Update modal title
+            if (thumbTitles[idx] && thumbTitles[idx][i]) {
+              document.getElementById('modal-title').textContent = dashInfo[idx].title.replace(' (Power BI)', '') + ' - ' + thumbTitles[idx][i];
+            }
           };
           tRow.appendChild(t);
         });
