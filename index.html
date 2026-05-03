@@ -313,19 +313,6 @@
       .orb {
         opacity: 0.65;
       }
-      .stag, h2.stitle {
-        text-align: center;
-      }
-      .sdiv {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .scrl {
-        left: 50%;
-        transform: translateX(-50%);
-        justify-content: center;
-        width: max-content;
-      }
       nav {
         display: none;
         position: fixed;
@@ -467,33 +454,33 @@
       .hphoto-wrap {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-start;
+        justify-content: flex-start;
         order: -1;
         margin-bottom: 28px;
         width: 100%;
         max-width: 300px;
-        margin-left: auto;
+        margin-left: 0;
         margin-right: auto;
       }
 
       .hcon {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+        align-items: flex-start;
+        text-align: left;
       }
 
       .heyebrow {
-        justify-content: center;
+        justify-content: flex-start;
       }
 
       .hdesc {
-        text-align: center;
+        text-align: left;
       }
 
       .hcta {
-        justify-content: center;
+        justify-content: flex-start;
       }
 
       .hphoto-wrap::before {
@@ -531,7 +518,7 @@
 
     .hname {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(54px, 7.2vw, 108px);
+      font-size: clamp(42px, 10vw, 108px);
       font-weight: 800;
       letter-spacing: -3px;
       line-height: 1.1;
