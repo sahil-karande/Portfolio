@@ -788,7 +788,19 @@
     .slbl {
       color: var(--muted);
       font-size: 14px;
-      margin-top: 3px
+      margin-top: 3px;
+      word-break: break-word;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+    @media(max-width: 450px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .atxt p {
@@ -868,9 +880,12 @@
 
     .wgrid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 285px), 1fr));
+      grid-template-columns: 1fr;
       gap: 22px;
       margin-top: 40px
+    }
+    @media(min-width: 650px) {
+      .wgrid { grid-template-columns: repeat(auto-fit, minmax(285px, 1fr)); }
     }
 
     .fc {
@@ -1067,9 +1082,12 @@
 
     .dash-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+      grid-template-columns: 1fr;
       gap: 22px;
       margin-top: 40px
+    }
+    @media(min-width: 650px) {
+      .dash-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
     }
 
     /* Dashboard flip card — taller than project cards */
@@ -1482,9 +1500,12 @@
 
     .tgrid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 265px), 1fr));
+      grid-template-columns: 1fr;
       gap: 17px;
       margin-top: 40px
+    }
+    @media(min-width: 600px) {
+      .tgrid { grid-template-columns: repeat(auto-fit, minmax(265px, 1fr)); }
     }
 
     .tcat {
@@ -1493,7 +1514,8 @@
       border-radius: 15px;
       padding: 26px;
       transition: border-color 0.3s, transform 0.3s;
-      position: relative
+      position: relative;
+      min-width: 0;
     }
 
     .tcat:hover {
@@ -1727,9 +1749,12 @@
 
     .cgrid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 265px), 1fr));
+      grid-template-columns: 1fr;
       gap: 17px;
       margin-top: 40px
+    }
+    @media(min-width: 600px) {
+      .cgrid { grid-template-columns: repeat(auto-fit, minmax(265px, 1fr)); }
     }
 
     .cc {
@@ -2567,14 +2592,14 @@
       <div>
         <div class="stag reveal">About Me</div>
         <div class="sdiv reveal"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:5px">
+        <div class="stats-grid">
           <div class="asc reveal">
             <div class="snum">8.92</div>
             <div class="slbl">CGPA at GHRCEM</div>
           </div>
           <div class="asc reveal">
             <div class="snum">2027</div>
-            <div class="slbl">B.Tech AI Graduate</div>
+            <div class="slbl">B.Tech AI Graduate (most probably)</div>
           </div>
           <div class="asc reveal">
             <div class="snum">IEEE</div>
@@ -2612,21 +2637,20 @@
           </p>
         </div>
         <ul class="alist reveal">
-          <li><strong>Intelligence:&nbsp;</strong>Developing ML models and NLP solutions, including an IEEE-published
-            WordNet for the Gondi language.</li>
-          <li><strong>Development:&nbsp;</strong>Crafting full-stack applications like Zenith (Habit Tracking) and
-            Ayupredict (Health Prediction) using Python, React, FastAPI, and Supabase.</li>
-          <li><strong>Leadership:&nbsp;</strong>Serving as the Vice Chair of the IEEE Communication Society, leading
-            technical initiatives and fostering a culture of innovation.</li>
+          <li><strong>Intelligence:&nbsp;</strong>Developing ML models, NLP solutions, and full-stack applications like Zenith and Ayupredict. Authored an IEEE-published WordNet for the Gondi language.</li>
+          <li><strong>Analyst:&nbsp;</strong>Extracting actionable insights from complex data, building predictive models, and designing interactive dashboards to drive strategic decisions.</li>
+          <li><strong>Leadership:&nbsp;</strong>Serving as the Vice Chair of the IEEE Communication Society, leading technical initiatives and fostering a culture of innovation.</li>
         </ul>
-        <a href="Sahil_Karande_Resume.pdf" class="dbtn reveal" download target="_blank">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
-          </svg>
-          Download Resume
-        </a>
+        <div style="display: flex; justify-content: center; width: 100%;">
+          <a href="Sahil_Karande_Resume.pdf" class="dbtn reveal" download target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Resume
+          </a>
+        </div>
       </div>
     </div>
   </section>
