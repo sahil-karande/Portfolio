@@ -768,9 +768,10 @@
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 22px 18px;
+      padding: clamp(14px, 4vw, 22px) clamp(12px, 3vw, 18px);
       margin-bottom: 12px;
-      transition: border-color 0.3s, transform 0.3s
+      transition: border-color 0.3s, transform 0.3s;
+      min-width: 0;
     }
 
     .asc:hover {
@@ -780,14 +781,14 @@
 
     .snum {
       font-family: 'Syne', sans-serif;
-      font-size: 36px;
+      font-size: clamp(26px, 6vw, 36px);
       font-weight: 800;
       color: var(--accent)
     }
 
     .slbl {
       color: var(--muted);
-      font-size: 14px;
+      font-size: clamp(12px, 3vw, 14px);
       margin-top: 3px;
       word-break: break-word;
     }
@@ -796,11 +797,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-bottom: 5px;
-    }
-    @media(max-width: 450px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     .atxt p {
