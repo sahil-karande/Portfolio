@@ -1837,6 +1837,155 @@
       font-size: 13px
     }
 
+    /* ═══ CERTIFICATION CARDS ═══ */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 24px;
+      margin-top: 40px
+    }
+
+    @media(max-width: 440px) {
+      .cert-grid { grid-template-columns: 1fr; }
+    }
+
+    .cert-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 28px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s ease
+    }
+
+    .cert-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--brand-color, var(--accent));
+      border-radius: 3px
+    }
+
+    .cert-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--brand-color, var(--accent)), transparent 60%);
+      opacity: 0.5
+    }
+
+    .cert-card:hover {
+      border-color: rgba(124, 110, 247, 0.33);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(124, 110, 247, 0.08)
+    }
+
+    .cert-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px
+    }
+
+    .cert-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      flex-shrink: 0
+    }
+
+    .cert-org {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase
+    }
+
+    .cert-card h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 10px;
+      color: var(--text)
+    }
+
+    .cert-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px
+    }
+
+    .cert-meta svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--muted);
+      flex-shrink: 0
+    }
+
+    .cert-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px
+    }
+
+    .cert-skills span {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      background: rgba(124, 110, 247, 0.1);
+      color: var(--accent2);
+      border: 1px solid rgba(124, 110, 247, 0.15);
+      letter-spacing: 0.3px
+    }
+
+    .cert-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent3);
+      border: 1px solid rgba(56, 189, 248, 0.15)
+    }
+
+    /* ═══ AWARDS ═══ */
+    #awards {
+      background: transparent
+    }
+
+    #awards::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(20, 20, 32, 0.84) 10%, rgba(20, 20, 32, 0.84) 90%, transparent);
+      z-index: -1
+    }
+
     /* ═══ CONTACT ═══ */
     #contact {
       background: transparent
@@ -3138,9 +3287,51 @@
   </section>
 
   <section id="certifications">
+    <div class="stag reveal">Professional Development</div>
+    <div class="sdiv reveal"></div>
+    <h2 class="stitle reveal">Certifications</h2>
+    <div class="cert-grid">
+      <div class="cert-card reveal" style="--brand-color: #86BC25;">
+        <span class="cert-badge">Forage</span>
+        <div class="cert-header">
+          <div class="cert-logo" style="background: linear-gradient(135deg, #86BC25, #6B9E1E);">D</div>
+          <span class="cert-org" style="color: #86BC25;">Deloitte</span>
+        </div>
+        <h4>Data Analytics Job Simulation</h4>
+        <div class="cert-meta">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          May 2026
+        </div>
+        <div class="cert-skills">
+          <span>Data Analysis</span>
+          <span>Forensic Technology</span>
+        </div>
+      </div>
+      <div class="cert-card reveal" style="--brand-color: #486AAE;">
+        <span class="cert-badge">Forage</span>
+        <div class="cert-header">
+          <div class="cert-logo" style="background: linear-gradient(135deg, #486AAE, #2D4F8E);">T</div>
+          <span class="cert-org" style="color: #486AAE;">Tata Group</span>
+        </div>
+        <h4>GenAI Powered Data Analytics Job Simulation</h4>
+        <div class="cert-meta">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          May 2026
+        </div>
+        <div class="cert-skills">
+          <span>Exploratory Data Analysis</span>
+          <span>AI Risk Profiling</span>
+          <span>Data Storytelling</span>
+          <span>AI-Driven Strategy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="awards">
     <div class="stag reveal">Achievements</div>
     <div class="sdiv reveal"></div>
-    <h2 class="stitle reveal">Certifications <em>&amp;</em> Awards</h2>
+    <h2 class="stitle reveal">Awards <em>&amp;</em> Recognition</h2>
     <div class="cgrid">
       <div class="cc reveal">
         <!-- Replace src with your actual certificate image -->
@@ -3187,8 +3378,7 @@
       </div>
     </div>
     <div class="aws">
-      <h3 style="font-family:'Syne',sans-serif;font-size:21px;font-weight:700;margin-bottom:22px" class="reveal">Awards
-        &amp; Recognition</h3>
+      <h3 style="font-family:'Syne',sans-serif;font-size:21px;font-weight:700;margin-bottom:22px" class="reveal">Notable Achievements</h3>
       <div class="ar reveal">
         <div class="ai"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
         <div class="at">
