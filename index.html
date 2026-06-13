@@ -1970,7 +1970,68 @@
       text-transform: uppercase;
       background: rgba(56, 189, 248, 0.12);
       color: var(--accent3);
-      border: 1px solid rgba(56, 189, 248, 0.15)
+      border: 1px solid rgba(56, 189, 248, 0.15);
+      z-index: 2
+    }
+
+    .cert-img {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.3s
+    }
+
+    .cert-img:hover {
+      border-color: rgba(124, 110, 247, 0.3)
+    }
+
+    .cert-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.4s ease
+    }
+
+    .cert-img:hover img {
+      transform: scale(1.03)
+    }
+
+    .cert-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent3);
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.15);
+      text-decoration: none;
+      transition: all 0.25s;
+      letter-spacing: 0.3px
+    }
+
+    .cert-link:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.3);
+      transform: translateY(-1px)
+    }
+
+    .cert-link svg {
+      width: 13px;
+      height: 13px;
+      stroke: currentColor
     }
 
     /* ═══ AWARDS ═══ */
@@ -3293,6 +3354,9 @@
     <div class="cert-grid">
       <div class="cert-card reveal" style="--brand-color: #86BC25;">
         <span class="cert-badge">Forage</span>
+        <div class="cert-img" onclick="openCert(this.querySelector('img'))">
+          <img src="deloitte-cert.png" alt="Deloitte Data Analytics Certificate">
+        </div>
         <div class="cert-header">
           <div class="cert-logo" style="background: linear-gradient(135deg, #86BC25, #6B9E1E);">D</div>
           <span class="cert-org" style="color: #86BC25;">Deloitte</span>
@@ -3306,9 +3370,16 @@
           <span>Data Analysis</span>
           <span>Forensic Technology</span>
         </div>
+        <a href="https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_68dc1e4fad1adcb90bbcb32e_1779555505381_completion_certificate.pdf" target="_blank" rel="noopener" class="cert-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Verify Credential
+        </a>
       </div>
       <div class="cert-card reveal" style="--brand-color: #486AAE;">
         <span class="cert-badge">Forage</span>
+        <div class="cert-img" onclick="openCert(this.querySelector('img'))">
+          <img src="tata-cert.png" alt="Tata GenAI Data Analytics Certificate">
+        </div>
         <div class="cert-header">
           <div class="cert-logo" style="background: linear-gradient(135deg, #486AAE, #2D4F8E);">T</div>
           <span class="cert-org" style="color: #486AAE;">Tata Group</span>
@@ -3324,6 +3395,10 @@
           <span>Data Storytelling</span>
           <span>AI-Driven Strategy</span>
         </div>
+        <a href="https://www.theforage.com/completion-certificates/ifobHAoMjQs9s6bKS/gMTdCXwDdLYoXZ3wG_ifobHAoMjQs9s6bKS_68dc1e4fad1adcb90bbcb32e_1779610814083_completion_certificate.pdf" target="_blank" rel="noopener" class="cert-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Verify Credential
+        </a>
       </div>
     </div>
   </section>
