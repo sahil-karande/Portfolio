@@ -753,41 +753,34 @@
       z-index: 2;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 14px;
-      padding: 7px 16px;
-      border-radius: 30px;
-      background: rgba(74, 222, 128, 0.1);
-      border: 1px solid rgba(74, 222, 128, 0.3);
-      font-size: 13px;
-      font-weight: 600;
-      color: #4ade80;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      backdrop-filter: blur(8px);
+      gap: 7px;
+      margin-top: 10px;
+      padding: 5px 13px 5px 10px;
+      border-radius: 8px;
+      background: rgba(74, 222, 128, 0.07);
+      border: 1px solid rgba(74, 222, 128, 0.2);
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(134, 239, 172, 0.85);
+      letter-spacing: 0.2px;
+      font-family: 'DM Sans', sans-serif;
       opacity: 0;
       animation: fu 0.9s 3s forwards;
-      transition: background 0.25s, border-color 0.25s, transform 0.25s;
-    }
-
-    .open-to-work:hover {
-      background: rgba(74, 222, 128, 0.18);
-      border-color: rgba(74, 222, 128, 0.5);
-      transform: translateY(-2px);
+      transition: background 0.25s, border-color 0.25s;
     }
 
     .otw-dot {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: #4ade80;
+      background: #86efac;
       flex-shrink: 0;
-      animation: otwPulse 2s ease-in-out infinite;
+      animation: otwPulse 2.4s ease-in-out infinite;
     }
 
     @keyframes otwPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
-      50% { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
     }
 
     .hroles-wrap {
