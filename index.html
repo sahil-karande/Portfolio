@@ -753,34 +753,33 @@
       z-index: 2;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       margin-top: 10px;
-      padding: 5px 13px 5px 10px;
-      border-radius: 8px;
-      background: rgba(74, 222, 128, 0.07);
-      border: 1px solid rgba(74, 222, 128, 0.2);
+      padding: 4px 12px 4px 9px;
+      border-radius: 20px;
+      background: rgba(124, 110, 247, 0.1);
+      border: 1px solid rgba(124, 110, 247, 0.22);
       font-size: 12px;
-      font-weight: 500;
-      color: rgba(134, 239, 172, 0.85);
-      letter-spacing: 0.2px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.15px;
       font-family: 'DM Sans', sans-serif;
       opacity: 0;
       animation: fu 0.9s 3s forwards;
-      transition: background 0.25s, border-color 0.25s;
     }
 
     .otw-dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      background: #86efac;
+      background: var(--accent3);
       flex-shrink: 0;
-      animation: otwPulse 2.4s ease-in-out infinite;
+      animation: otwPulse 2.8s ease-in-out infinite;
     }
 
     @keyframes otwPulse {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.35; }
+      55% { opacity: 0.3; }
     }
 
     .hroles-wrap {
